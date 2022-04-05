@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Group 11 - Project 1</title>
+        {% else %}
+        <title>Home Page - Group 11 - Project 1</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>Group 11 - Project 1: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
