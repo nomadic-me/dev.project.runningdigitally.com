@@ -1,10 +1,17 @@
 <!doctype html>
 <html>
     <head>
+        {% if title %}
+        <title>{{ title }} - Group 11 - Project 1</title>
+        {% else %}
         <title>Home Page - Group 11 - Project 1</title>
+        {% endif %}
     </head>
     <body>
         <h1>Hello, {{ user.username }}!</h1>
         <p>Hello from Passenger (and Fintech Group 11) via app folder, - Something awesome is brewing! Standby for more updates!</p>
+        {% for post in posts %}
+        <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+        {% endfor %}
     </body>
 </html>
