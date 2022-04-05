@@ -7,6 +7,11 @@ sys.path.append(os.getcwd())
 from flask import Flask
 application = Flask(__name__)
 
-@application.route('/')
-def index():
-    return 'Hello from Passenger (and Fintech Group 11), - Something awesome is brewing! Standby for more updates!'
+###### commenting this section to now load 'app'
+#@application.route('/')
+#def index():
+#    return 'Hello from Passenger (and Fintech Group 11), - Something awesome is brewing! Standby for more updates!'
+
+
+sys.path.append('app')
+from app import app as application
