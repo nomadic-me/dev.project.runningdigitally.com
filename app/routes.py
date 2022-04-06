@@ -5,10 +5,16 @@ from werkzeug.urls import url_parse
 from app import app, db
 from app.models import User
 from flask import request
+from datetime import datetime
 
 from app.forms import RegistrationForm
 from app.forms import LoginForm
 
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
 
 @app.route('/')
 @app.route('/index')
