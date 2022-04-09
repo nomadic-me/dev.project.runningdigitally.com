@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base.html" %}
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
@@ -15,8 +15,24 @@
     </nav>
 
 {% block content %}
-    <h1>Hi, Welcome to a look on millennial investing</h1>
-
+    <h1>Hi, {{ current_user.username }}!!</h1>
+    {% if form %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols=32, rows=4) }}<br>
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% endif %}
+    
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
 
 {% endblock %}
 
