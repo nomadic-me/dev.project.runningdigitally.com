@@ -18,8 +18,8 @@ from app.email import send_password_reset_email
 from app.forms import ResetPasswordForm
 
         
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
+@app.route('/')
+@app.route('/index')
 def index():
-    return render_template('index.html', title='Home', form=form, posts=posts)        
+    return render_template('index.html', title='Home')        
 
