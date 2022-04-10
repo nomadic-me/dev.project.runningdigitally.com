@@ -43,7 +43,7 @@ def graph1():
     })
     fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
     graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('graph.html', graphJSON=graphJSON1, title='Graph1 ')
+    return render_template('graph1.html', graphJSON=graphJSON1, title='Graph1 ')
         
     
     
