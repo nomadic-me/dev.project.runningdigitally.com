@@ -16,6 +16,8 @@ application = Flask(__name__)
 sys.path.append('app')
 from app import app as application
 
+
+
 from app import app, db
 from app.models import User, Post
 
