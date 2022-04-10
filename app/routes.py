@@ -31,11 +31,11 @@ def index():
 
 #Adding simple Plotly Graph
 @app.route('/Graph')
-    def notdash():
+def graph():
     df = pd.DataFrame({
-      'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 'Bananas'],
-      'Amount': [4, 1, 2, 2, 4, 5],
-      'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
+    'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 'Bananas'],
+    'Amount': [4, 1, 2, 2, 4, 5],
+    'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
     })
     fig = px.bar(df, x='Fruit', y='Amount', color='City', barmode='group')
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
