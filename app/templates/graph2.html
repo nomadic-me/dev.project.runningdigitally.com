@@ -1,6 +1,7 @@
 {% extends "base2.html" %}
 
 {% block content %}
+
 <div class="mx-auto" >
 <h1>Hi, Welcome to "A Look On Millennial Investing"</h1>
 <h2>GDP per Capita Over Time</h2>
@@ -11,7 +12,7 @@
 
 </div>
 
-<script>
+<script type='text/javascript'>
         function cb(selection) {
             $.getJSON({
                 url: "/callback", data: { 'data': selection }, success: function (result) {
@@ -21,7 +22,7 @@
         }
     </script>
 
-<script>
+<script type='text/javascript'>
     cb("United Kingdom");
 </script>
 
