@@ -54,7 +54,7 @@ def cb():
 
 @app.route('/Graph2')
 def graph2():
-    return render_template('chartsajax.html')#,  graphJSON=gm())
+    return render_template('graph2.html')#,  graphJSON=gm())
 
 
 def gm(country='United Kingdom'):
