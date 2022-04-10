@@ -24,6 +24,9 @@ import plotly
 import plotly.express as px
 
 
+@app.route('/callback', methods=['POST', 'GET'])
+def cb():
+    return gm(request.args.get('data'))
 
 @app.route('/')
 @app.route('/index')
@@ -47,9 +50,7 @@ def graph1():
 #Adding Plotly Graph with Callback
 
 
-@app.route('/callback', methods=['POST', 'GET'])
-def cb():
-    return gm(request.args.get('data'))
+
 
 
 @app.route('/Graph2')
