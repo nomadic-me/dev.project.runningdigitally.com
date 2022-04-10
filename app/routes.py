@@ -36,14 +36,14 @@ def index():
 #Adding simple Plotly Graph
 @app.route('/Graph1')
 def graph1():
-    df = pd.DataFrame({
+    df1 = pd.DataFrame({
     'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 'Bananas'],
     'Amount': [4, 1, 2, 2, 4, 5],
     'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
     })
-    fig1 = px.bar(df, x='Fruit', y='Amount', color='City', barmode='group')
+    fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
     graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('graph.html', graphJSON=graphJSON1, title='Graph')
+    return render_template('graph.html', graphJSON=graphJSON1, title='Graph1 ')
         
     
     
