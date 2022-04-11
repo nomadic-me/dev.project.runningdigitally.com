@@ -42,11 +42,14 @@
     <div class="container">
         <div class="row">
             <div class="col text-light bg-dark" style="margin:20px 0px 20px 0px">
-                <h1 style="padding:20px 0px 20px 0px">Stock movements demonstrator</h1>
+                <h2 style="padding:20px 0px 20px 0px">Stock movements demonstrator</h2>
             </div>
         </div>
+        
         <div class="row">
-            <div class="col"><b>Select stock</b></div>
+            <div class="col">
+                <b>Select stock</b>
+            </div>
             <div class="col">
                 <select id="stock" class="form-select" aria-label="Select" )>
                     <option selected value="MSFT">Microsoft</option>
@@ -55,8 +58,9 @@
                     <option value="GOOGL">Google</option>
                 </select>
             </div>
-            <div class="col"><b>for period</b></div>
-
+            <div class="col">
+                <b>for period</b>
+            </div>
             <div class="col">
                 <select id="period" class="form-select" aria-label="Select" )>
                     <option selected value="1d">1 day</option>
@@ -72,8 +76,8 @@
                     <option value="max">Max</option>
                 </select>
             </div>
-            <div class="col"><b>Interval</b></div>
-
+            <div class="col"><b>Interval</b>
+            </div>
             <div class="col">
                 <select id="interval" class="form-select" aria-label="Select" )>
                     <option selected value="1m">1 minute</option>
@@ -88,15 +92,16 @@
                     <option value="1w">1 week</option>
                     <option value="1m">1 month</option>
                     <option value="3m">3 months</option>
-
                 </select>
             </div>
             <div class="col">
                 <button type="button" class="btn btn-primary" onclick="callback()">Fetch stock</button>
             </div>
-            <div class="w-100" style="padding:10px;text-align:right;font-size: small;"><i>Note: not all intervals are
-                    valid for all periods</i></div>
-
+        </div>
+        <div class="row">
+            <div class="w-100" style="padding:10px;text-align:right;font-size: small;">
+                <i>Note: not all intervals are valid for all periods</i>
+            </div>
             <div class="col-3"><p><b>Stock info</b></p>
                 <p>Symbol: <span id="symbol">N/A</span></p>
                 <p>Day High: <span id="dayHigh">N/A</span></p>

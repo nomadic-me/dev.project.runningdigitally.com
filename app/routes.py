@@ -27,9 +27,10 @@ import plotly.express as px
 #Adding import yfinance as 
 import yfinance as yf
 
+#Used for GDP Graph
 @app.route('/callback', methods=['POST', 'GET'])
 def cb():
-    return gm(request.args.get('data'))
+    return gm_gdp(request.args.get('data'))
 
 @app.route('/')
 @app.route('/index')
@@ -57,7 +58,7 @@ def graph2():
     return render_template('graph2.html')#,  graphJSON=gm())
 
 
-def gm(country='United Kingdom'):
+def gm_gdp(country='United Kingdom'):
     df = pd.DataFrame(px.data.gapminder())
     fig = px.line(df[df['country']==country], x="year", y="gdpPercap", title=country)
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
