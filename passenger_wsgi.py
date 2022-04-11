@@ -2,10 +2,10 @@ import sys, os
 
 INTERP = os.path.join(os.environ['HOME'], 'dev.project.runningdigitally.com', 'venv2', 'bin', 'python3')
 
-from dotenv import load_dotenv 
-load_dotenv()
-if (os.environ.get('INTERP')):
-    INTERP = os.environ.get('INTERP')
+#from dotenv import load_dotenv 
+#load_dotenv()
+#if (os.environ.get('INTERP')):
+#    INTERP = os.environ.get('INTERP')
 
 if sys.executable != INTERP:
         os.execl(INTERP, INTERP, *sys.argv)
