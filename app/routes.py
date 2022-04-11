@@ -65,7 +65,7 @@ def gm(country='United Kingdom'):
     
 
     
-@app.route('/callback2/<endpoint>', methods=['POST', 'GET'])
+@app.route('/callback2/<endpoint>')
 def cb2(endpoint):   
     if endpoint == "getStock":
         return gm(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
