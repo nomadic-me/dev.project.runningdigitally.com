@@ -34,6 +34,7 @@ pip install dash
 pip install pandas
 pip install plotly
 pip install yfinance
+pip install email_validator
 ```
 
 ### Setup local .env file
