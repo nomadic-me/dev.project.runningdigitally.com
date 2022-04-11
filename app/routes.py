@@ -65,7 +65,7 @@ def gm(country='United Kingdom'):
     
 
     
-@app.route('/callback2/<endpoint>')
+@app.route('/callback2/<endpoint>', methods=['POST', 'GET'])
 def cb2(endpoint):   
     if endpoint == "getStock":
         return gm(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
@@ -84,7 +84,7 @@ def gm(stock,period, interval):
     # Create a line graph
     df_stock = st.history(period=(period), interval=interval)
     df_stock=  df_stock.reset_index()
-    df_stock.columns = ['Date-Time']+list(df.columns[1:])
+    df_stock.columns = ['Date-Time']+list(df_stock.columns[1:])
     max = (df_stock['Open'].max())
     min = (df_stock['Open'].min())
     range = max - min
