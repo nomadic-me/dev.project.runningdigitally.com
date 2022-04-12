@@ -84,7 +84,6 @@ def cb2(endpoint):
 # Return the JSON data for the Plotly graph
 def gm(stock,period, interval):
     st = yf.Ticker(stock)
-  
     # Create a line graph
     df_stock = st.history(period=(period), interval=interval)
     df_stock=  df_stock.reset_index()
