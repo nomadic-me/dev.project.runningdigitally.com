@@ -179,6 +179,8 @@
             name.innerHTML = json.fiftyTwoWeekHigh;            
             name = document.getElementById('52WeekLow1');
             name.innerHTML = json.fiftyTwoWeekLow;
+            name = document.getElementById('beta1');
+            name.innerHTML = json.beta;            
         }
         
         function info2(json) {
@@ -194,6 +196,8 @@
             name.innerHTML = json.fiftyTwoWeekHigh;            
             name = document.getElementById('52WeekLow2');
             name.innerHTML = json.fiftyTwoWeekLow;
+            name = document.getElementById('beta2');
+            name.innerHTML = json.beta;            
         }
         
         function info3(json) {
@@ -209,6 +213,8 @@
             name.innerHTML = json.fiftyTwoWeekHigh;            
             name = document.getElementById('52WeekLow3');
             name.innerHTML = json.fiftyTwoWeekLow;
+            name = document.getElementById('beta3');
+            name.innerHTML = json.beta;
         }        
                 async function callback() {
             let Stock = document.getElementById('stock').value;
@@ -276,6 +282,7 @@
                 <p>Day Low: <span id="dayLow1">N/A</span></p> 
                 <p>52-Week High: <span id="52WeekHigh1">N/A</span></p>
                 <p>52-Week Low: <span id="52WeekLow1">N/A</span></p> 
+                <p>Beta: <span id="beta1">N/A</span></p>                
             </div>
             <div class="col-9">
                 <h2 id="companyName1"></h2>
@@ -290,7 +297,8 @@
                 <p>Day High: <span id="dayHigh2">N/A</span></p>
                 <p>Day Low: <span id="dayLow2">N/A</span></p> 
                 <p>52-Week High: <span id="52WeekHigh2">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow2">N/A</span></p> 
+                <p>52-Week Low: <span id="52WeekLow2">N/A</span></p>
+                <p>Beta: <span id="beta2">N/A</span></p>
             </div>
             <div class="col-9">
                 <h2 id="companyName2"></h2>
@@ -306,6 +314,7 @@
                 <p>Day Low: <span id="dayLow3">N/A</span></p> 
                 <p>52-Week High: <span id="52WeekHigh3">N/A</span></p>
                 <p>52-Week Low: <span id="52WeekLow3">N/A</span></p> 
+                <p>Beta: <span id="beta3">N/A</span></p>                
             </div>
             <div class="col-9">
                 <h2 id="companyName3"></h2>
