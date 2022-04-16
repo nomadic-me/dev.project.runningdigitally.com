@@ -123,5 +123,5 @@ def portfolio():
     return render_template('portfolio.html')#,  graphJSON=gm())
 
 @app.route('/Return')
-def return():
+def return_portfolio():
     return render_template('return.html')#,  graphJSON=gm())
