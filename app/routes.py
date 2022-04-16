@@ -88,14 +88,15 @@ def gm(stock,period, interval):
     df_stock = st.history(period=(period), interval=interval)
     df_stock=  df_stock.reset_index()
     df_stock.columns = ['Date-Time']+list(df_stock.columns[1:])
-    max = (df_stock['Open'].max())
-    min = (df_stock['Open'].min())
+    df_stock.loc[:,'Symbol'] = stock
+    max = (df_stock['Close'].max())
+    min = (df_stock['Close'].min())
     range = max - min
     margin = range * 0.05
     max = max + margin
     min = min - margin
     fig_stock = px.area(df_stock, x='Date-Time', y="Open",
-        hover_data=("Open","Close","Volume"), 
+        hover_data=("Symbol","Open","Close","Volume"), 
         range_y=(min,max), template="seaborn" )
 
     # Create a JSON representation of the graph
