@@ -11,25 +11,12 @@
                 alert("Selected Portfolio is: " + Portfolio);
                 let Stock1 = 'BNS.TO';
                 let Stock2 = 'UBER';
-                let Stock3 = 'TSLA';                
-            }
-            
-            if (Portfolio == 'Portfolio2') {
-                alert("Selected Portfolio is: " + Portfolio);
-                let Stock1 = 'VGT';
-                let Stock2 = 'ZDV.TO';
-                let Stock3 = 'ZEB.TO';                
-            }
-
-            if (Portfolio == 'Portfolio3') {
-                alert("Selected Portfolio is: " + Portfolio);
-                let Stock1 = 'SQQQ';
-                let Stock2 = 'WSRD.TO';
-                let Stock3 = 'SPY';                
-            }
-            
-            let response1 = await fetch("/callback2/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);
-            let response2 = await fetch("/callback2/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);                       let response3 = await fetch("/callback2/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+                let Stock3 = 'TSLA';
+                alert("Selected Portfolio is: " + Stock1 + Stock2 + Stock3);
+                
+            let response1 = await fetch("/callback2/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
+            let response2 = await fetch("/callback2/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3 = await fetch("/callback2/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
             
             if (response1.ok) {
                 let chartJson1 = await response1.json();
@@ -70,7 +57,116 @@
                 }
             } else {
                 alert("HTTP-Error: " + response3.status + "on getStock");
-            }            
+            }
+            }
+            
+            if (Portfolio == 'Portfolio2') {
+                alert("Selected Portfolio is: " + Portfolio);
+                let Stock1 = 'VGT';
+                let Stock2 = 'ZDV.TO';
+                let Stock3 = 'ZEB.TO';    
+                
+                let response1 = await fetch("/callback2/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
+            let response2 = await fetch("/callback2/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3 = await fetch("/callback2/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            
+            if (response1.ok) {
+                let chartJson1 = await response1.json();
+                if (response1.ok) {
+                    response1 = await fetch("/callback2/getInfo?data=" + Stock1);
+                    let infoJson1 = await response1.json();
+                    info1(infoJson1);
+                    Plotly.newPlot('chart1', chartJson1, {});
+                } else {
+                    alert("HTTP-Error: " + response1.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response1.status + "on getStock");
+            }
+            if (response2.ok) {
+                let chartJson2 = await response2.json();
+                if (response2.ok) {
+                    response2 = await fetch("/callback2/getInfo?data=" + Stock2);
+                    let infoJson2 = await response2.json();
+                    info2(infoJson2);
+                    Plotly.newPlot('chart2', chartJson2, {});
+                } else {
+                    alert("HTTP-Error: " + response2.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response2.status + "on getStock");
+            }
+
+            if (response3.ok) {
+                let chartJson3 = await response3.json();
+                if (response3.ok) {
+                    response3 = await fetch("/callback2/getInfo?data=" + Stock3);
+                    let infoJson3 = await response3.json();
+                    info3(infoJson3);
+                    Plotly.newPlot('chart3', chartJson3, {});
+                } else {
+                    alert("HTTP-Error: " + response3.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response3.status + "on getStock");
+            }
+                
+            }
+
+            if (Portfolio == 'Portfolio3') {
+                alert("Selected Portfolio is: " + Portfolio);
+                let Stock1 = 'SQQQ';
+                let Stock2 = 'WSRD.TO';
+                let Stock3 = 'SPY';        
+                
+                let response1 = await fetch("/callback2/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
+            let response2 = await fetch("/callback2/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3 = await fetch("/callback2/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            
+            if (response1.ok) {
+                let chartJson1 = await response1.json();
+                if (response1.ok) {
+                    response1 = await fetch("/callback2/getInfo?data=" + Stock1);
+                    let infoJson1 = await response1.json();
+                    info1(infoJson1);
+                    Plotly.newPlot('chart1', chartJson1, {});
+                } else {
+                    alert("HTTP-Error: " + response1.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response1.status + "on getStock");
+            }
+            if (response2.ok) {
+                let chartJson2 = await response2.json();
+                if (response2.ok) {
+                    response2 = await fetch("/callback2/getInfo?data=" + Stock2);
+                    let infoJson2 = await response2.json();
+                    info2(infoJson2);
+                    Plotly.newPlot('chart2', chartJson2, {});
+                } else {
+                    alert("HTTP-Error: " + response2.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response2.status + "on getStock");
+            }
+
+            if (response3.ok) {
+                let chartJson3 = await response3.json();
+                if (response3.ok) {
+                    response3 = await fetch("/callback2/getInfo?data=" + Stock3);
+                    let infoJson3 = await response3.json();
+                    info3(infoJson3);
+                    Plotly.newPlot('chart3', chartJson3, {});
+                } else {
+                    alert("HTTP-Error: " + response3.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response3.status + "on getStock");
+            }
+            }
+            
+
+            
         }
         
         function info1(json) {
