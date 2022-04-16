@@ -179,8 +179,15 @@
             name.innerHTML = json.fiftyTwoWeekHigh;            
             name = document.getElementById('52WeekLow1');
             name.innerHTML = json.fiftyTwoWeekLow;
-            name = document.getElementById('beta1');
-            name.innerHTML = json.beta;            
+            if (json.beta) {
+                name = document.getElementById('beta1');
+                name.innerHTML = json.beta;            
+            }
+            else
+            {
+                name = document.getElementById('beta1');
+                name.innerHTML = json.beta3Year;    
+            }   
         }
         
         function info2(json) {
@@ -196,8 +203,15 @@
             name.innerHTML = json.fiftyTwoWeekHigh;            
             name = document.getElementById('52WeekLow2');
             name.innerHTML = json.fiftyTwoWeekLow;
-            name = document.getElementById('beta2');
-            name.innerHTML = json.beta;            
+            if (json.beta) {
+                name = document.getElementById('beta2');
+                name.innerHTML = json.beta;            
+            }
+            else
+            {
+                name = document.getElementById('beta2');
+                name.innerHTML = json.beta3Year;    
+            }              
         }
         
         function info3(json) {
@@ -213,8 +227,15 @@
             name.innerHTML = json.fiftyTwoWeekHigh;            
             name = document.getElementById('52WeekLow3');
             name.innerHTML = json.fiftyTwoWeekLow;
-            name = document.getElementById('beta3');
-            name.innerHTML = json.beta;
+            if (json.beta) {
+                name = document.getElementById('beta3');
+                name.innerHTML = json.beta;            
+            }
+            else
+            {
+                name = document.getElementById('beta3');
+                name.innerHTML = json.beta3Year;    
+            }   
         }        
                 async function callback() {
             let Stock = document.getElementById('stock').value;
