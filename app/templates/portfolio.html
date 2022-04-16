@@ -3,7 +3,121 @@
 {% block head %}
 {{super()}}
     <script>
-        async function callback() {
+        async function callback_portfolio() {
+            let Period = '5y';
+            let Interval = '1d';
+            let Portfolio = document.getElementById('portfolio').value;
+            if (Portfolio == 'Portfolio1') {
+                alert("Selected Portfolio is: " + Portfolio);
+                let Stock1 = 'BNS.TO';
+                let Stock2 = 'UBER';
+                let Stock3 = 'TSLA';                
+            }
+            
+            if (Portfolio == 'Portfolio2') {
+                alert("Selected Portfolio is: " + Portfolio);
+                let Stock1 = 'VGT';
+                let Stock2 = 'ZDV.TO';
+                let Stock3 = 'ZEB.TO';                
+            }
+
+            if (Portfolio == 'Portfolio3') {
+                alert("Selected Portfolio is: " + Portfolio);
+                let Stock1 = 'SQQQ';
+                let Stock2 = 'WSRD.TO';
+                let Stock3 = 'SPY';                
+            }
+            
+            let response1 = await fetch("/callback2/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);
+            let response2 = await fetch("/callback2/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);                       let response3 = await fetch("/callback2/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            
+            if (response1.ok) {
+                let chartJson1 = await response1.json();
+                if (response1.ok) {
+                    response1 = await fetch("/callback2/getInfo?data=" + Stock1);
+                    let infoJson1 = await response1.json();
+                    info1(infoJson1);
+                    Plotly.newPlot('chart1', chartJson1, {});
+                } else {
+                    alert("HTTP-Error: " + response1.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response1.status + "on getStock");
+            }
+            if (response2.ok) {
+                let chartJson2 = await response2.json();
+                if (response2.ok) {
+                    response2 = await fetch("/callback2/getInfo?data=" + Stock2);
+                    let infoJson2 = await response2.json();
+                    info2(infoJson2);
+                    Plotly.newPlot('chart2', chartJson2, {});
+                } else {
+                    alert("HTTP-Error: " + response2.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response2.status + "on getStock");
+            }
+
+            if (response3.ok) {
+                let chartJson3 = await response3.json();
+                if (response3.ok) {
+                    response3 = await fetch("/callback2/getInfo?data=" + Stock3);
+                    let infoJson3 = await response3.json();
+                    info3(infoJson3);
+                    Plotly.newPlot('chart3', chartJson3, {});
+                } else {
+                    alert("HTTP-Error: " + response3.status + "on getInfo");
+                }
+            } else {
+                alert("HTTP-Error: " + response3.status + "on getStock");
+            }            
+        }
+        
+        function info1(json) {
+            let name = document.getElementById('companyName1');
+            name.innerHTML = json.shortName;
+            name = document.getElementById('symbol1');
+            name.innerHTML = json.symbol;
+            name = document.getElementById('dayHigh1');
+            name.innerHTML = json.dayHigh;
+            name = document.getElementById('dayLow1');
+            name.innerHTML = json.dayLow;
+            name = document.getElementById('52WeekHigh1');
+            name.innerHTML = json.fiftyTwoWeekHigh;            
+            name = document.getElementById('52WeekLow1');
+            name.innerHTML = json.fiftyTwoWeekLow;
+        }
+        
+        function info2(json) {
+            let name = document.getElementById('companyName2');
+            name.innerHTML = json.shortName;
+            name = document.getElementById('symbol2');
+            name.innerHTML = json.symbol;
+            name = document.getElementById('dayHigh2');
+            name.innerHTML = json.dayHigh;
+            name = document.getElementById('dayLow2');
+            name.innerHTML = json.dayLow;
+            name = document.getElementById('52WeekHigh2');
+            name.innerHTML = json.fiftyTwoWeekHigh;            
+            name = document.getElementById('52WeekLow2');
+            name.innerHTML = json.fiftyTwoWeekLow;
+        }
+        
+        function info3(json) {
+            let name = document.getElementById('companyName3');
+            name.innerHTML = json.shortName;
+            name = document.getElementById('symbol3');
+            name.innerHTML = json.symbol;
+            name = document.getElementById('dayHigh3');
+            name.innerHTML = json.dayHigh;
+            name = document.getElementById('dayLow3');
+            name.innerHTML = json.dayLow;
+            name = document.getElementById('52WeekHigh3');
+            name.innerHTML = json.fiftyTwoWeekHigh;            
+            name = document.getElementById('52WeekLow3');
+            name.innerHTML = json.fiftyTwoWeekLow;
+        }        
+                async function callback() {
             let Stock = document.getElementById('stock').value;
             let Period = document.getElementById('period').value;
             let Interval = document.getElementById('interval').value;
@@ -31,7 +145,6 @@
             name.innerHTML = json.dayHigh;
             name = document.getElementById('dayLow');
             name.innerHTML = json.dayLow;
-            
             name = document.getElementById('52WeekHigh');
             name.innerHTML = json.fiftyTwoWeekHigh;            
             name = document.getElementById('52WeekLow');
@@ -43,6 +156,73 @@
 {% block content %}
 
 <h1>Hi, Welcome to "A Look On Millennial Investing"</h1>
+
+<div class="container">
+    <div class="row">
+            <div class="col text-light bg-dark" style="margin:20px 0px 20px 0px">
+                <h2 style="padding:20px 0px 20px 0px">Portfolio Graphs</h2>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-9">
+                <select id="portfolio" class="form-select" aria-label="Select" )>
+                    <option selected value="Portfolio1">Portfolio 1: BNS.TO, UBER, TSLA</option>
+                    <option value="Portfolio2">Portfolio 2: VGT, ZDV.TO, ZEB.TO</option>
+                    <option value="Portfolio3">Portfolio 3: SQQQ, WSRD.TO, SPY</option>                                    
+                </select>
+        </div>
+        <div class="col-3">
+                <button type="button" class="btn btn-primary" onclick="callback_portfolio()">Fetch Portfolio</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col-3"><p><b>Stock info 1</b></p>
+                <p>Symbol: <span id="symbol1">N/A</span></p>
+                <p>Day High: <span id="dayHigh1">N/A</span></p>
+                <p>Day Low: <span id="dayLow1">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh1">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow1">N/A</span></p> 
+            </div>
+            <div class="col-9">
+                <h2 id="companyName1"></h2>
+                <div id="chart1" class="chart" style="height: 300px;border: 1px solid; 
+                    box-shadow: 5px 5px 5px #888888;">
+                </div>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-3"><p><b>Stock info 2</b></p>
+                <p>Symbol: <span id="symbol2">N/A</span></p>
+                <p>Day High: <span id="dayHigh2">N/A</span></p>
+                <p>Day Low: <span id="dayLow2">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh2">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow2">N/A</span></p> 
+            </div>
+            <div class="col-9">
+                <h2 id="companyName2"></h2>
+                <div id="chart2" class="chart" style="height: 300px;border: 1px solid; 
+                    box-shadow: 5px 5px 5px #888888;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"><p><b>Stock info 3</b></p>
+                <p>Symbol: <span id="symbol3">N/A</span></p>
+                <p>Day High: <span id="dayHigh3">N/A</span></p>
+                <p>Day Low: <span id="dayLow3">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh3">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow3">N/A</span></p> 
+            </div>
+            <div class="col-9">
+                <h2 id="companyName3"></h2>
+                <div id="chart3" class="chart" style="height: 300px;border: 1px solid; 
+                    box-shadow: 5px 5px 5px #888888;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <div class="container">
         <div class="row">
@@ -136,54 +316,7 @@
     </div>
 
 
-<div class="container">
-    <div class="row">
-            <div class="col text-light bg-dark" style="margin:20px 0px 20px 0px">
-                <h2 style="padding:20px 0px 20px 0px">Portfolio 1</h2>
-            </div>
-    </div>
-    <div class="row">
-        <div class="col-2"><p><b>Stock info 1</b></p>
-                <p>Symbol: <span id="symbol1">N/A</span></p>
-                <p>Day High: <span id="dayHigh1">N/A</span></p>
-                <p>Day Low: <span id="dayLow1">N/A</span></p> 
-                <p>52-Week High: <span id="52WeekHigh1">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow1">N/A</span></p> 
-        </div>
-        <div class="col-2">
-                <h2 id="companyName1"></h2>
-                <div id="chart1" class="chart" style="height: 300px;border: 1px solid; 
-                    box-shadow: 5px 5px 5px #888888;">
-                </div>
-        </div>
-                <div class="col-2"><p><b>Stock info 2</b></p>
-                <p>Symbol: <span id="symbol2">N/A</span></p>
-                <p>Day High: <span id="dayHigh2">N/A</span></p>
-                <p>Day Low: <span id="dayLow2">N/A</span></p> 
-                <p>52-Week High: <span id="52WeekHigh2">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow2">N/A</span></p> 
-        </div>
-        <div class="col-2">
-                <h2 id="companyName2"></h2>
-                <div id="chart2" class="chart" style="height: 300px;border: 1px solid; 
-                    box-shadow: 5px 5px 5px #888888;">
-                </div>
-        </div>
-                <div class="col-2"><p><b>Stock info 3</b></p>
-                <p>Symbol: <span id="symbol3">N/A</span></p>
-                <p>Day High: <span id="dayHigh3">N/A</span></p>
-                <p>Day Low: <span id="dayLow3">N/A</span></p> 
-                <p>52-Week High: <span id="52WeekHigh3">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow3">N/A</span></p> 
-        </div>
-        <div class="col-2">
-                <h2 id="companyName3"></h2>
-                <div id="chart3" class="chart" style="height: 300px;border: 1px solid; 
-                    box-shadow: 5px 5px 5px #888888;">
-                </div>
-        </div>
-    </div>
-</div>
+
 
 
     <script>callback();</script>
