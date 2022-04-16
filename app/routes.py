@@ -80,7 +80,18 @@ def cb2(endpoint):
     else:
         return "Bad endpoint", 400
     
-
+@app.route('/callback3/<endpoint>')
+def cb2(endpoint):   
+    if endpoint == "getStock":
+        return gm(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
+    elif endpoint == "getInfo":
+        stock = request.args.get('data')
+        st = yf.Ticker(stock)
+        return json.dumps(st.info)
+    else:
+        return "Bad endpoint", 400
+    
+    
 # Return the JSON data for the Plotly graph
 def gm(stock,period, interval):
     st = yf.Ticker(stock)
@@ -110,3 +121,7 @@ def stock():
 @app.route('/Porfolio')
 def portfolio():
     return render_template('portfolio.html')#,  graphJSON=gm())
+
+@app.route('/Return')
+def return():
+    return render_template('return.html')#,  graphJSON=gm())
