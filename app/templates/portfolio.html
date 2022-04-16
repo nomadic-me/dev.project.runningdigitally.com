@@ -13,6 +13,8 @@
                 let Stock3 = 'VYM';
                 let Stock4 = 'PG';
                 let Stock5 = 'VNQ';
+                let pageTitle = document.getElementById('portfolioType');
+                pageTitle.innerHTML = "Portfolio 1: Low Risk (Beta < 1): BRK.B, DIS, VYM, PG and VNQ"
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
                 
@@ -99,6 +101,8 @@
                 let Stock3 = 'BRK-B';
                 let Stock4 = 'VYM';
                 let Stock5 = 'U';  
+                let pageTitle = document.getElementById('portfolioType');
+                pageTitle.innerHTML = "Portfolio 2: Balanced Risk:  (Beta ≈ 1): DND, ENGH, BRK.B, VYM and U"
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
                 
@@ -184,6 +188,8 @@
                 let Stock3 = 'SPOT';
                 let Stock4 = 'BROS';
                 let Stock5 = 'BARK'; 
+                let pageTitle = document.getElementById('portfolioType');
+                pageTitle.innerHTML = "Portfolio 3: High Risk: (Beta > 1): STNE, U, SPOT, BROS and BARK"                
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
                 
@@ -424,7 +430,7 @@
 
 {% block content %}
 
-<h1>Hi, Welcome to "A Look On Millennial Investing"</h1>
+<h1 id="portfolioType">Please select the Portfolio of choice</h1>
 
 <div class="container">
     <div class="row">
