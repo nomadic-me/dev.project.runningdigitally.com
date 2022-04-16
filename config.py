@@ -14,5 +14,11 @@ class Config(object):
     INTERP = os.environ.get('INTERP')
     ADMINS = ['info@runningdigitally.com']
     
+    # Set Alpaca API key and secret
+    api_key=os.getenv("ALPACA_API_KEY")
+
+    # Create the Alpaca API object
+    api_secret_key=os.getenv("ALPACA_SECRET_KEY")
+    
     LANGUAGES = ['en', 'es']
     
