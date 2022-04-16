@@ -81,7 +81,7 @@ def cb2(endpoint):
         return "Bad endpoint", 400
     
 @app.route('/callback3/<endpoint>')
-def cb2(endpoint):   
+def cb3(endpoint):   
     if endpoint == "getStock":
         return gm(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
     elif endpoint == "getInfo":
