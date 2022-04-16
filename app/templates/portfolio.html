@@ -43,6 +43,7 @@
 {% block content %}
 
 <h1>Hi, Welcome to "A Look On Millennial Investing"</h1>
+
     <div class="container">
         <div class="row">
             <div class="col text-light bg-dark" style="margin:20px 0px 20px 0px">
@@ -133,6 +134,57 @@
            </div>    
         </div>
     </div>
+
+
+<div class="container">
+    <div class="row">
+            <div class="col text-light bg-dark" style="margin:20px 0px 20px 0px">
+                <h2 style="padding:20px 0px 20px 0px">Portfolio 1</h2>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-2"><p><b>Stock info 1</b></p>
+                <p>Symbol: <span id="symbol1">N/A</span></p>
+                <p>Day High: <span id="dayHigh1">N/A</span></p>
+                <p>Day Low: <span id="dayLow1">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh1">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow1">N/A</span></p> 
+        </div>
+        <div class="col-2">
+                <h2 id="companyName1"></h2>
+                <div id="chart1" class="chart" style="height: 300px;border: 1px solid; 
+                    box-shadow: 5px 5px 5px #888888;">
+                </div>
+        </div>
+                <div class="col-2"><p><b>Stock info 2</b></p>
+                <p>Symbol: <span id="symbol2">N/A</span></p>
+                <p>Day High: <span id="dayHigh2">N/A</span></p>
+                <p>Day Low: <span id="dayLow2">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh2">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow2">N/A</span></p> 
+        </div>
+        <div class="col-2">
+                <h2 id="companyName2"></h2>
+                <div id="chart2" class="chart" style="height: 300px;border: 1px solid; 
+                    box-shadow: 5px 5px 5px #888888;">
+                </div>
+        </div>
+                <div class="col-2"><p><b>Stock info 3</b></p>
+                <p>Symbol: <span id="symbol3">N/A</span></p>
+                <p>Day High: <span id="dayHigh3">N/A</span></p>
+                <p>Day Low: <span id="dayLow3">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh3">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow3">N/A</span></p> 
+        </div>
+        <div class="col-2">
+                <h2 id="companyName3"></h2>
+                <div id="chart3" class="chart" style="height: 300px;border: 1px solid; 
+                    box-shadow: 5px 5px 5px #888888;">
+                </div>
+        </div>
+    </div>
+</div>
+
 
     <script>callback();</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
