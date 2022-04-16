@@ -106,3 +106,7 @@ def gm(stock,period, interval):
 @app.route('/Stock')
 def stock():
     return render_template('stock.html')#,  graphJSON=gm())
+
+@app.route('/Porfolio')
+def portfolio():
+    return render_template('portfolio.html')#,  graphJSON=gm())
