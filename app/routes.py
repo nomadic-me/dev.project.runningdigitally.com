@@ -52,16 +52,12 @@ def index():
 #Adding simple Plotly Graph
 @app.route('/Graph1')
 def graph1():
-    
-    
     start_date = "2022-03-21"
     end_date = "2022-02-21"
-
     # Set the tickers
     tickers = ["TSLA", "SPY"]
     timeframe = "1D"
-    
-    api = REST(api_key , api_secret_key, api_version='v2')
+    #api = REST(api_key , api_secret_key, api_version='v2')
     #stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
     #stock_and_bond_prices.index = stock_and_bond_prices.index.date
     
