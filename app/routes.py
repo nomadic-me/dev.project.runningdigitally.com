@@ -52,6 +52,9 @@ def index():
 #Adding simple Plotly Graph
 @app.route('/Graph1')
 def graph1():
+    from dotenv import load_dotenv 
+    load_dotenv()
+    
     start_date = "2022-03-21"
     end_date = "2022-02-21"
     # Set the tickers
