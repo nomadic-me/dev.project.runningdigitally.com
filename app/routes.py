@@ -62,8 +62,8 @@ def graph1():
     timeframe = "1D"
     
     api = REST(api_key , api_secret_key, api_version='v2')
-    stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
-    stock_and_bond_prices.index = stock_and_bond_prices.index.date
+    #stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    #stock_and_bond_prices.index = stock_and_bond_prices.index.date
     
     df1 = pd.DataFrame({
     'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 'Bananas'],
@@ -71,9 +71,9 @@ def graph1():
     'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
     })
     fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
-    fig2 = px.bar(stock_and_bond_prices, x='symbol', y='close', color='symbol', barmode='group')
+    #fig2 = px.bar(stock_and_bond_prices, x='symbol', y='close', color='symbol')
     graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+    #graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('graph1.html', graphJSON=graphJSON1, title='Graph1 ')
 
 @app.route('/new')
