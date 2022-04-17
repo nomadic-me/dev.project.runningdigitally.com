@@ -56,18 +56,19 @@ def index():
 @app.route('/Graph1')
 def graph1():
     # Set Alpaca API key and secret
-    api_key=os.getenv("ALPACA_API_KEY")
+    api_key1=os.getenv("ALPACA_API_KEY")
 
     # Create the Alpaca API object
-    api_secret_key=os.getenv("ALPACA_SECRET_KEY")
+    api_secret_key1=os.getenv("ALPACA_SECRET_KEY")
     
-    start_date = "2022-03-21"
-    end_date = "2022-02-21"
+    start_date = "2022-02-21"
+    end_date = "2022-03-21"
     # Set the tickers
-    tickers = ["TSLA", "SPY"]
+    tickers = ["TSLA","AAPL"]
     timeframe = "1D"
-    api = REST(api_key , api_secret_key, api_version='v2')
-    stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    api = REST(api_key1, api_secret_key1, api_version='v2')
+    df2 = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    #df2 = api.get_bars("AAPL", TimeFrame.Hour, "2021-06-08", "2021-06-08", adjustment='raw').df
     #stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
     #stock_and_bond_prices.index = stock_and_bond_prices.index.date
     
@@ -77,10 +78,10 @@ def graph1():
     'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
     })
     fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
-    #fig2 = px.bar(stock_and_bond_prices, x='symbol', y='close', color='symbol')
+    fig2 = px.bar(df2, x='symbol', y='close', color='symbol')
     graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    #graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('graph1.html', graphJSON=graphJSON1, title='Graph1 ')
+    graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template('graph1.html', graphJSON=graphJSON2, title="Graph1")
 
 @app.route('/new')
 def new():
