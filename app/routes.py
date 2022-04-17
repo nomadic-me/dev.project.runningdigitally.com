@@ -37,6 +37,10 @@ debugtoggle = True
 # import alpaca_trade_api as tradeapi #####Commenting the deprecated way to call the API
 from alpaca_trade_api.rest import REST, TimeFrame #Current way to import Alpaca API
 #from dotenv import load_dotenv 
+from dotenv import load_dotenv 
+load_dotenv()
+    
+
 
 
 #Used for GDP Graph
@@ -52,16 +56,19 @@ def index():
 #Adding simple Plotly Graph
 @app.route('/Graph1')
 def graph1():
-    from dotenv import load_dotenv 
-    load_dotenv()
+    # Set Alpaca API key and secret
+    api_key=os.getenv("ALPACA_API_KEY")
+
+    # Create the Alpaca API object
+    api_secret_key=os.getenv("ALPACA_SECRET_KEY")
     
     start_date = "2022-03-21"
     end_date = "2022-02-21"
     # Set the tickers
     tickers = ["TSLA", "SPY"]
     timeframe = "1D"
-    #api = REST(api_key , api_secret_key, api_version='v2')
-    #stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    api = REST(api_key , api_secret_key, api_version='v2')
+    stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
     #stock_and_bond_prices.index = stock_and_bond_prices.index.date
     
     df1 = pd.DataFrame({
