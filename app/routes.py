@@ -29,7 +29,6 @@ import yfinance as yf
 
 
 #Adding Alpaca API Imports
-
 import os
 import requests
 
@@ -68,6 +67,7 @@ def graph1():
     tickers = ["TSLA", "SPY"]
     timeframe = "1D"
     api = REST(api_key , api_secret_key, api_version='v2')
+    stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
     #stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
     #stock_and_bond_prices.index = stock_and_bond_prices.index.date
     
