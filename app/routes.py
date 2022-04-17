@@ -72,7 +72,8 @@ def graph1():
     })
     fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
     fig2 = px.bar(stock_and_bond_prices, x='symbol', y='close', color='symbol', barmode='group')
-    graphJSON1 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('graph1.html', graphJSON=graphJSON1, title='Graph1 ')
 
 @app.route('/new')
