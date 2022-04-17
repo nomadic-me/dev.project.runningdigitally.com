@@ -27,6 +27,18 @@ import plotly.express as px
 #Adding import yfinance as 
 import yfinance as yf
 
+
+#Adding Alpaca API Imports
+
+import os
+import requests
+
+debugtoggle = True
+# import alpaca_trade_api as tradeapi #####Commenting the deprecated way to call the API
+from alpaca_trade_api.rest import REST, TimeFrame #Current way to import Alpaca API
+#from dotenv import load_dotenv 
+
+
 #Used for GDP Graph
 @app.route('/callback', methods=['POST', 'GET'])
 def cb():
@@ -40,13 +52,27 @@ def index():
 #Adding simple Plotly Graph
 @app.route('/Graph1')
 def graph1():
+    
+    
+    start_date = "2022-03-21"
+    end_date = "2022-02-21"
+
+    # Set the tickers
+    tickers = ["TSLA", "SPY"]
+    timeframe = "1D"
+    
+    api = REST(api_key , api_secret_key, api_version='v2')
+    stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    stock_and_bond_prices.index = stock_and_bond_prices.index.date
+    
     df1 = pd.DataFrame({
     'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 'Bananas'],
     'Amount': [4, 1, 2, 2, 4, 5],
     'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
     })
     fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
-    graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    fig2 = px.bar(stock_and_bond_prices, x='symbol', y='close', color='symbol', barmode='group')
+    graphJSON1 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('graph1.html', graphJSON=graphJSON1, title='Graph1 ')
 
 @app.route('/new')
