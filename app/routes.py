@@ -58,54 +58,14 @@ def cb():
 def index():
     return render_template('index.html', title='Home')
 
-#Adding simple Plotly Graph
-@app.route('/Graph1')
-def graph1():
-    # Set Alpaca API key and secret
-    api_key1=os.getenv("ALPACA_API_KEY")
-
-    # Create the Alpaca API object
-    api_secret_key1=os.getenv("ALPACA_SECRET_KEY")
-    
-    start_date = "2019-04-10"
-    end_date = "2022-04-10"
-    # Set the tickers
-    tickers = "TSLA"
-    timeframe = "1D"
-    api = REST(api_key1, api_secret_key1, api_version='v2')
-    df2 = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
-    df2.loc[:,'symbol'] = tickers
-    #df2 = api.get_bars("AAPL", TimeFrame.Hour, "2021-06-08", "2021-06-08", adjustment='raw').df
-    #stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
-    #stock_and_bond_prices.index = stock_and_bond_prices.index.date
-    
-    df1 = pd.DataFrame({
-    'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 'Bananas'],
-    'Amount': [4, 1, 2, 2, 4, 5],
-    'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
-    })
-    fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
-    fig2 = px.bar(df2, x='symbol', y='close', color='symbol')
-    max = (df2['close'].max())
-    min = (df2['close'].min())
-    range = max - min
-    margin = range * 0.05
-    max = max + margin
-    min = min - margin
-    fig_stock = px.area(df2, x=df2.index, y="open", hover_data=("symbol","open","close","volume"), 
-        range_y=(min,max), template="seaborn" )
-    graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-    graphJSON3 = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('graph1.html', graphJSON=graphJSON3, title="Graph1")
 
 @app.route('/new')
 def new():
     return render_template('new.html', title='New')
     
     
+#This is a Hello World Graph
 #Adding Plotly Graph with Callback
-
 @app.route('/Graph2')
 def graph2():
     return render_template('graph2.html')#,  graphJSON=gm())
@@ -166,8 +126,6 @@ def gm(stock,period, interval):
 
 
 def alpaca_get_market_data(stock,period, interval):
-
- 
     start_date = "2019-04-10"
     end_date = "2022-04-10"
     # Set the tickers
@@ -183,8 +141,9 @@ def alpaca_get_market_data(stock,period, interval):
     margin = range * 0.05
     max = max + margin
     min = min - margin
+    chart_title = "Stock Data for " + stock
     fig_stock = px.area(df2, x=df2.index, y="open", hover_data=("symbol","open","close","volume"), 
-        range_y=(min,max), template="seaborn" )
+        range_y=(min,max), template="seaborn", title=chart_title)
     graphJSON = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
