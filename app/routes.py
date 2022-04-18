@@ -101,6 +101,8 @@ def cb4(endpoint):
         return mcforecast_get_data(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
     elif endpoint == "getPortfolio":
         return mcforecast_get_portfolio(request.args.get('stock1'),request.args.get('stock2'),request.args.get('stock3'),request.args.get('stock4'),request.args.get('stock5'))
+    elif endpoint == "getCumulativeReturn":
+        return mcforecast_get_portfolio_cumulative_return(request.args.get('stock1'),request.args.get('stock2'),request.args.get('stock3'),request.args.get('stock4'),request.args.get('stock5'))
     else:
         return "Bad endpoint", 400
     
@@ -212,6 +214,42 @@ def mcforecast_get_portfolio(stock1,stock2,stock3,stock4,stock5):
     fig_stock.update_layout(showlegend=False)
     graphJSON = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
+
+def mcforecast_get_portfolio_cumulative_return(stock1,stock2,stock3,stock4,stock5):
+    start_date = "2019-04-10"
+    end_date = "2022-04-10"
+    # Set the tickers
+    # tickers = "AAPL"
+    tickers = [stock1,stock2,stock3,stock4,stock5]
+    timeframe = "1D"
+    api = REST(api_key1, api_secret_key1, api_version='v2')
+    df2 = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    pivottable = pd.pivot_table(df2, values='close', index=df2.index, columns=['symbol'])
+    ticker_name = [(x,'close') for x in pivottable.columns]
+    micolumns = pd.MultiIndex.from_tuples(ticker_name)
+    pivottable.columns = micolumns
+    #chart_title = "Montecarlo Simulations for " + tickers[0] + ";" + tickers[1] + ";" + tickers[2] + ";" + tickers[3] + ";" + tickers[4] + ";"
+    MC_5years = MCSimulation(portfolio_data = pivottable,
+        weights = [0.2,0.2,0.2,0.2,0.2],
+        num_simulation = 100,
+        num_trading_days = 252*5
+    )
+    MC_5years.calc_cumulative_return()    
+    initial_investment = 1000
+    # Use the lower and upper `95%` confidence intervals to calculate the range of the possible outcomes of our $20,000
+    ci_lower = round(MC_5years.confidence_interval.iloc[0] * initial_investment, 2)
+    ci_upper = round(MC_5years.confidence_interval.iloc[1] * initial_investment, 2)
+    # Print results
+    data = {}
+    cumulative_return = (f"Based on Monte-Carlo Simulation, There is a 95% chance that an initial investment of ${initial_investment} in the portfolio"
+      f" over the next 5 years will end within in the range of"
+      f" ${ci_lower:,} and ${ci_upper:,}"
+      f"<br><br> This site is for educational and demonstation purposes, only and should not be relied upon as Finanacial Advice")    
+    data['key'] = cumulative_return
+    json_data = json.dumps(data)
+    return json_data
+
+
 
 @app.route('/Stock')
 def stock():
