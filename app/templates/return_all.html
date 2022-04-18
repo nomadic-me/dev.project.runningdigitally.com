@@ -16,7 +16,7 @@
                 let pageTitle = document.getElementById('portfolioType');
                 pageTitle.innerHTML = "Portfolio 1: Low Volatility (Beta < 1): BRK.B, T, VYM, PG and VNQ"
                 let name = document.getElementById('alert');
-                name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
+                name.innerHTML = "Please allow for upto 60 secs for the data to load";
             let response_portfolio = await fetch("/callback4/getPortfolio?stock1=" + Stock1 + "&stock2=" + Stock2 + "&stock3=" + Stock3+ "&stock4=" + Stock4+ "&stock5=" + Stock5);     
             let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval); 
             let response2 = await fetch("/callback4/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
@@ -184,7 +184,7 @@
                 let pageTitle = document.getElementById('portfolioType');
                 pageTitle.innerHTML = "Portfolio 2: Balanced Volatility:  (Beta ≈ 1): VOO, MSFT, BRK.B, VYM and U"
                 let name = document.getElementById('alert');
-                name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
+                name.innerHTML = "Please allow for upto 60 secs for the data to load";
            
             let response_portfolio = await fetch("/callback4/getPortfolio?stock1=" + Stock1 + "&stock2=" + Stock2 + "&stock3=" + Stock3+ "&stock4=" + Stock4+ "&stock5=" + Stock5);    
             let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
@@ -348,7 +348,7 @@
                 let pageTitle = document.getElementById('portfolioType');
                 pageTitle.innerHTML = "Portfolio 3: High Volatility: (Beta > 1): STNE, U, SPOT, BROS and BARK"                
                 let name = document.getElementById('alert');
-                name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
+                name.innerHTML = "Please allow for upto 60 secs for the data to load";
             let response_portfolio = await fetch("/callback4/getPortfolio?stock1=" + Stock1 + "&stock2=" + Stock2 + "&stock3=" + Stock3+ "&stock4=" + Stock4+ "&stock5=" + Stock5);      
             let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
             let response2 = await fetch("/callback4/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
@@ -676,7 +676,7 @@
         <div class="col-3">
                 <button type="button" class="btn btn-primary" onclick="callback_portfolio()">Fetch Portfolio</button>
         </div>
-        <div class="col-12"> <span id="alert" style="color:red"> </span> </div>
+        <div class="col-12" style="text-align: center;"> <h3 id="alert" style="color:red"> </h3> </div>
     </div>
     <div class="row">
                     <div id="PortfolioChart1" class="chart" style="height: 300px;border: 1px solid; 
