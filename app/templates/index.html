@@ -2,14 +2,29 @@
 
 
 {% block content %}
-<div class="mx-auto" >
-<h1>Hi, Welcome to "A Look On Millennial Investing"</ h1>
-<h2> Awesome things are brewing behind the scenes </ h2>
-<h3> Meanwhile, you can check out our First Stock Graph we put together for you: </ h3>
-  <ul>
-        <li><h3>Stock <a href="{{ url_for('stock') }}">Graph</a> </ h3></ li> 
+<div class="container">
+    <div class="row">
+        <br><br>        <br><br>
+<h1 style="text-align: center;">Hi, Welcome to "A Look On Millennial Investing"</ h1>
 
+<h2> Awesome things are brewing behind the scenes </ h2>
+<h3> 
+    We have used recommendations from industry experts to curate 3 Portfolios to match our Millennial Investors<br> 
+    Find one that best resonates with you.
+    <ul>
+                    <li>Portfolio 1: Low Volatility (Beta < 1): BRK.B, T, VYM, PG and VNQ</li>
+                    <li>Portfolio 2: Balanced Volatility:  (Beta ≈ 1): VOO, MSFT, BRK.B, VYM and U</li>
+                    <li>Portfolio 3: High Volatility: (Beta > 1): STNE, U, SPOT, BROS and BARK</li>
     </ul>
-</div>
+<br>
+You can check out the Visualization, Portfolio Details and Monte-Carlo Simulations Based Portfolio Prediciton in the pages below:<br>  
+    <ul>
+                    <li><a href="{{ url_for('return_portfolio_all') }}">Returns: Overall Portfolio</a></li>
+                    <li><a href="{{ url_for('return_portfolio') }}">Returns: Individual Stock</a></li>
+    </ul>
+</h3>
+    </div>
+    </div>
+
 {% endblock %}
 
