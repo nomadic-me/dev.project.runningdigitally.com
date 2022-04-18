@@ -185,7 +185,8 @@
                 pageTitle.innerHTML = "Portfolio 2: Balanced Volatility:  (Beta ≈ 1): VOO, MSFT, BRK.B, VYM and U"
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
-                
+           
+            let response_portfolio = await fetch("/callback4/getPortfolio?stock1=" + Stock1 + "&stock2=" + Stock2 + "&stock3=" + Stock3+ "&stock4=" + Stock4+ "&stock5=" + Stock5);    
             let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
             let response2 = await fetch("/callback4/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
             let response3 = await fetch("/callback4/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
@@ -196,6 +197,15 @@
             let response3_1 = await fetch("/callback4/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
             let response4_1 = await fetch("/callback4/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
             let response5_1 = await fetch("/callback4/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);                
+            if (response_portfolio.ok) {
+                let chartPortfolioJson1 = await response_portfolio.json();
+                if (response_portfolio.ok) {
+                    Plotly.newPlot('PortfolioChart1', chartPortfolioJson1, {});
+            } else {
+                alert("HTTP-Error: " + response_portfolio.status + "on getStock");
+            }
+            }    
+                
             if (response1.ok) {
                 let chartJson1 = await response1.json();
                 if (response1.ok) {
@@ -339,7 +349,7 @@
                 pageTitle.innerHTML = "Portfolio 3: High Volatility: (Beta > 1): STNE, U, SPOT, BROS and BARK"                
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
-                
+            let response_portfolio = await fetch("/callback4/getPortfolio?stock1=" + Stock1 + "&stock2=" + Stock2 + "&stock3=" + Stock3+ "&stock4=" + Stock4+ "&stock5=" + Stock5);      
             let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
             let response2 = await fetch("/callback4/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
             let response3 = await fetch("/callback4/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
@@ -350,6 +360,16 @@
             let response3_1 = await fetch("/callback4/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
             let response4_1 = await fetch("/callback4/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
             let response5_1 = await fetch("/callback4/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);                
+            
+            
+            if (response_portfolio.ok) {
+                let chartPortfolioJson1 = await response_portfolio.json();
+                if (response_portfolio.ok) {
+                    Plotly.newPlot('PortfolioChart1', chartPortfolioJson1, {});
+            } else {
+                alert("HTTP-Error: " + response_portfolio.status + "on getStock");
+            }
+            }        
             if (response1.ok) {
                 let chartJson1 = await response1.json();
                 if (response1.ok) {
