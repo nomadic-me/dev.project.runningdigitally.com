@@ -36,6 +36,7 @@ pip install pandas
 pip install plotly
 pip install yfinance
 pip install email_validator
+pip install alpaca_trade_api
 ```
 
 ### Setup local .env file

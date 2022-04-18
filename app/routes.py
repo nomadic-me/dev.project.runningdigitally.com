@@ -31,6 +31,8 @@ import yfinance as yf
 #Adding Alpaca API Imports
 import os
 import requests
+#Importing MCForecast Tool
+from MCForecastTools import MCSimulation
 
 debugtoggle = True
 # import alpaca_trade_api as tradeapi #####Commenting the deprecated way to call the API
@@ -40,7 +42,11 @@ from dotenv import load_dotenv
 load_dotenv()
     
 
+# Set Alpaca API key and secret
+api_key1=os.getenv("ALPACA_API_KEY")
 
+# Create the Alpaca API object
+api_secret_key1=os.getenv("ALPACA_SECRET_KEY")
 
 #Used for GDP Graph
 @app.route('/callback', methods=['POST', 'GET'])
@@ -160,15 +166,12 @@ def gm(stock,period, interval):
 
 
 def alpaca_get_market_data(stock,period, interval):
-    # Set Alpaca API key and secret
-    api_key1=os.getenv("ALPACA_API_KEY")
 
-    # Create the Alpaca API object
-    api_secret_key1=os.getenv("ALPACA_SECRET_KEY")
-    
+ 
     start_date = "2019-04-10"
     end_date = "2022-04-10"
     # Set the tickers
+    # tickers = "AAPL"
     tickers = stock
     timeframe = "1D"
     api = REST(api_key1, api_secret_key1, api_version='v2')
