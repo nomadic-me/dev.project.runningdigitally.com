@@ -127,7 +127,7 @@ def cb2(endpoint):
 @app.route('/callback3/<endpoint>')
 def cb3(endpoint):   
     if endpoint == "getStock":
-        return gm(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
+        return alpaca_get_market_data(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
     elif endpoint == "getInfo":
         stock = request.args.get('data')
         st = yf.Ticker(stock)
@@ -157,6 +157,33 @@ def gm(stock,period, interval):
     # Create a JSON representation of the graph
     graphJSON_stock = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON_stock
+
+
+def alpaca_get_market_data(stock,period, interval):
+    # Set Alpaca API key and secret
+    api_key1=os.getenv("ALPACA_API_KEY")
+
+    # Create the Alpaca API object
+    api_secret_key1=os.getenv("ALPACA_SECRET_KEY")
+    
+    start_date = "2019-04-10"
+    end_date = "2022-04-10"
+    # Set the tickers
+    tickers = stock
+    timeframe = "1D"
+    api = REST(api_key1, api_secret_key1, api_version='v2')
+    df2 = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    df2.loc[:,'symbol'] = tickers
+    max = (df2['close'].max())
+    min = (df2['close'].min())
+    range = max - min
+    margin = range * 0.05
+    max = max + margin
+    min = min - margin
+    fig_stock = px.area(df2, x=df2.index, y="open", hover_data=("symbol","open","close","volume"), 
+        range_y=(min,max), template="seaborn" )
+    graphJSON = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
 
 @app.route('/Stock')
 def stock():

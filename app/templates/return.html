@@ -8,7 +8,7 @@
             let Interval = '1d';
             let Portfolio = document.getElementById('portfolio').value;
             if (Portfolio == 'Portfolio1') {
-                let Stock1 = 'BRK-B';
+                let Stock1 = 'BRK.B';
                 let Stock2 = 'DIS';
                 let Stock3 = 'VYM';
                 let Stock4 = 'PG';
@@ -27,7 +27,14 @@
             if (response1.ok) {
                 let chartJson1 = await response1.json();
                 if (response1.ok) {
-                    response1 = await fetch("/callback3/getInfo?data=" + Stock1);
+                    if (Stock1 = "BRK.B") 
+                    {
+                        response1 = await fetch("/callback3/getInfo?data=" + "BRK-B");
+                    }
+                            else
+                            {
+                                                    response1 = await fetch("/callback3/getInfo?data=" + Stock3);
+                            }
                     let infoJson1 = await response1.json();
                     info1(infoJson1);
                     Plotly.newPlot('chart1', chartJson1, {});
@@ -98,7 +105,7 @@
             if (Portfolio == 'Portfolio2') {
                 let Stock1 = 'DND.TO';
                 let Stock2 = 'ENGH.TO';
-                let Stock3 = 'BRK-B';
+                let Stock3 = 'BRK.B';
                 let Stock4 = 'VYM';
                 let Stock5 = 'U';  
                 let pageTitle = document.getElementById('portfolioType');
@@ -141,7 +148,14 @@
             if (response3.ok) {
                 let chartJson3 = await response3.json();
                 if (response3.ok) {
-                    response3 = await fetch("/callback3/getInfo?data=" + Stock3);
+                    if (Stock3 = "BRK.B") 
+                    {
+                        response3 = await fetch("/callback3/getInfo?data=" + "BRK-B");
+                    }
+                            else
+                            {
+                                                    response3 = await fetch("/callback3/getInfo?data=" + Stock3);
+                            }
                     let infoJson3 = await response3.json();
                     info3(infoJson3);
                     Plotly.newPlot('chart3', chartJson3, {});
@@ -450,7 +464,7 @@
         <div class="col-3">
                 <button type="button" class="btn btn-primary" onclick="callback_portfolio()">Fetch Portfolio</button>
         </div>
-        <div class="col-12"> <span id="alert"> </span> </div>
+        <div class="col-12"> <span id="alert" style="color:red"> </span> </div>
     </div>
     <div class="row">
         <div class="row">
