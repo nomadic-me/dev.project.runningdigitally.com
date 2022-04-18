@@ -9,12 +9,12 @@
             let Portfolio = document.getElementById('portfolio').value;
             if (Portfolio == 'Portfolio1') {
                 let Stock1 = 'BRK-B';
-                let Stock2 = 'DIS';
+                let Stock2 = 'T';
                 let Stock3 = 'VYM';
                 let Stock4 = 'PG';
                 let Stock5 = 'VNQ';
                 let pageTitle = document.getElementById('portfolioType');
-                pageTitle.innerHTML = "Portfolio 1: Low Risk (Beta < 1): BRK.B, DIS, VYM, PG and VNQ"
+                pageTitle.innerHTML = "Portfolio 1: Low Risk (Beta < 1): BRK.B, T, VYM, PG and VNQ"
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
                 
@@ -97,12 +97,12 @@
             
             if (Portfolio == 'Portfolio2') {
                 let Stock1 = 'DND.TO';
-                let Stock2 = 'ENGH.TO';
+                let Stock2 = 'MSFT';
                 let Stock3 = 'BRK-B';
                 let Stock4 = 'VYM';
                 let Stock5 = 'U';  
                 let pageTitle = document.getElementById('portfolioType');
-                pageTitle.innerHTML = "Portfolio 2: Balanced Risk:  (Beta ≈ 1): DND, ENGH, BRK.B, VYM and U"
+                pageTitle.innerHTML = "Portfolio 2: Balanced Risk:  (Beta ≈ 1): DND, MSFT, BRK.B, VYM and U"
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
                 
@@ -442,8 +442,8 @@
     <div class="row">
         <div class="col-9">
                 <select id="portfolio" class="form-select" aria-label="Select" )>
-                    <option selected value="Portfolio1"> Portfolio 1: Low Risk (Beta < 1): BRK.B, DIS, VYM, PG and VNQ</option>
-                    <option value="Portfolio2">Portfolio 2: Balanced Risk:  (Beta ≈ 1): DND, ENGH, BRK.B, VYM and U</option>
+                    <option selected value="Portfolio1"> Portfolio 1: Low Risk (Beta < 1): BRK.B, T, VYM, PG and VNQ</option>
+                    <option value="Portfolio2">Portfolio 2: Balanced Risk:  (Beta ≈ 1): DND, MSFT, BRK.B, VYM and U</option>
                     <option value="Portfolio3">Portfolio 3: High Risk: (Beta > 1): STNE, U, SPOT, BROS and BARK</option>                             
                 </select>
         </div>

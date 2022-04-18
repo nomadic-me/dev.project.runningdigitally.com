@@ -84,6 +84,8 @@ def cb3(endpoint):
         stock = request.args.get('data')
         st = yf.Ticker(stock)
         return json.dumps(st.info)
+    elif endpoint == "getReturn":
+        return mcforecast_get_data(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
     else:
         return "Bad endpoint", 400
     
@@ -102,9 +104,10 @@ def gm(stock,period, interval):
     margin = range * 0.05
     max = max + margin
     min = min - margin
+    chart_title = "Stock Data for " + stock
     fig_stock = px.area(df_stock, x='Date-Time', y="Open",
         hover_data=("Symbol","Open","Close","Volume"), 
-        range_y=(min,max), template="seaborn" )
+        range_y=(min,max), template="seaborn", title=chart_title )
 
     # Create a JSON representation of the graph
     graphJSON_stock = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
@@ -129,6 +132,43 @@ def alpaca_get_market_data(stock,period, interval):
     min = min - margin
     chart_title = "Stock Data for " + stock
     fig_stock = px.area(df2, x=df2.index, y="open", hover_data=("symbol","open","close","volume"), 
+        range_y=(min,max), template="seaborn", title=chart_title)
+    graphJSON = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
+
+
+def mcforecast_get_data(stock,period, interval):
+    start_date = "2019-04-10"
+    end_date = "2022-04-10"
+    # Set the tickers
+    # tickers = "AAPL"
+    tickers = stock
+    timeframe = "1D"
+    api = REST(api_key1, api_secret_key1, api_version='v2')
+    df2 = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    df2.loc[:,'symbol'] = tickers
+    pivottable = pd.pivot_table(df2, values='close', index=df2.index, columns=['symbol'])
+    ticker_name = [(x,'close') for x in pivottable.columns]
+    micolumns = pd.MultiIndex.from_tuples(ticker_name)
+    pivottable.columns = micolumns
+    chart_title = "Percentage Change for " + stock
+    MC_5years = MCSimulation(portfolio_data = pivottable,
+        weights = [1],
+        num_simulation = 100,
+        num_trading_days = 252*5
+    )
+    
+
+    micolumns = ['close','daily_return']
+    MC_5years.portfolio_data.columns = micolumns
+    max = (MC_5years.portfolio_data['daily_return'].max())
+    min = (MC_5years.portfolio_data['daily_return'].min())
+    range = max - min
+    margin = range * 0.05
+    max = max + margin
+    min = min - margin
+    
+    fig_stock = px.area(MC_5years.portfolio_data, x=MC_5years.portfolio_data.index, y='daily_return', 
         range_y=(min,max), template="seaborn", title=chart_title)
     graphJSON = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
