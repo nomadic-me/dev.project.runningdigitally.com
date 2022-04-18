@@ -184,3 +184,8 @@ def portfolio():
 @app.route('/Return')
 def return_portfolio():
     return render_template('return.html')#,  graphJSON=gm())
+
+
+@app.route('/Return-Portfolio')
+def return_portfolio_all():
+    return render_template('return_all.html')#,  graphJSON=gm())
