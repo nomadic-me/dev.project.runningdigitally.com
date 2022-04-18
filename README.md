@@ -6,9 +6,9 @@ Go to this page for live Demonstration: [dev.project.runningdigitally.com](https
 
 ### Screenshots:
 
-![Homepage](Images/homepage.png)
-![Portfolio Returns Page](Images/portfolio-returns-Portfolio1.png)
-![Portfolio Individul Stock Page](Images/portfolio-individual-stocks-Portfolio1.png)
+![Homepage](images/homepage.png)
+![Portfolio Returns Page](images/portfolio-returns-Portfolio1.png)
+![Portfolio Individul Stock Page](images/portfolio-individual-stocks-Portfolio1.png)
 
 ## Prepare Local Python Environment
 
