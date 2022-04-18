@@ -17,28 +17,36 @@
                 pageTitle.innerHTML = "Portfolio 1: Low Volatility (Beta < 1): BRK.B, T, VYM, PG and VNQ"
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
-                
-            let response1 = await fetch("/callback3/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval); 
-            let response2 = await fetch("/callback3/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
-            let response3 = await fetch("/callback3/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
-            let response4 = await fetch("/callback3/getStock?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);                
-            let response5 = await fetch("/callback3/getStock?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
-            let response1_1 = await fetch("/callback3/getReturn?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);   
-            let response2_1 = await fetch("/callback3/getReturn?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
-            let response3_1 = await fetch("/callback3/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
-            let response4_1 = await fetch("/callback3/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
-            let response5_1 = await fetch("/callback3/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
-                
+            let response_portfolio = await fetch("/callback4/getPortfolio?stock1=" + Stock1 + "&stock2=" + Stock2 + "&stock3=" + Stock3+ "&stock4=" + Stock4+ "&stock5=" + Stock5);     
+            let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval); 
+            let response2 = await fetch("/callback4/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3 = await fetch("/callback4/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            let response4 = await fetch("/callback4/getStock?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);                
+            let response5 = await fetch("/callback4/getStock?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
+            let response1_1 = await fetch("/callback4/getReturn?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);   
+            let response2_1 = await fetch("/callback4/getReturn?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3_1 = await fetch("/callback4/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            let response4_1 = await fetch("/callback4/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
+            let response5_1 = await fetch("/callback4/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
+            
+            if (response_portfolio.ok) {
+                let chartPortfolioJson1 = await response_portfolio.json();
+                if (response_portfolio.ok) {
+                    Plotly.newPlot('PortfolioChart1', chartPortfolioJson1, {});
+            } else {
+                alert("HTTP-Error: " + response_portfolio.status + "on getStock");
+            }
+            }    
             if (response1.ok) {
                 let chartJson1 = await response1.json();
                 if (response1.ok) {
                     if (Stock1 = "BRK.B") 
                     {
-                        response1 = await fetch("/callback3/getInfo?data=" + "BRK-B");
+                        response1 = await fetch("/callback4/getInfo?data=" + "BRK-B");
                     }
                             else
                             {
-                                                    response1 = await fetch("/callback3/getInfo?data=" + Stock3);
+                                                    response1 = await fetch("/callback4/getInfo?data=" + Stock3);
                             }
                     let infoJson1 = await response1.json();
                     info1(infoJson1);
@@ -55,7 +63,7 @@
             if (response2.ok) {
                 let chartJson2 = await response2.json();
                 if (response2.ok) {
-                    response2 = await fetch("/callback3/getInfo?data=" + Stock2);
+                    response2 = await fetch("/callback4/getInfo?data=" + Stock2);
                     let infoJson2 = await response2.json();
                     info2(infoJson2);
                     Plotly.newPlot('chart2', chartJson2, {});
@@ -122,7 +130,7 @@
             if (response3.ok) {
                 let chartJson3 = await response3.json();
                 if (response3.ok) {
-                    response3 = await fetch("/callback3/getInfo?data=" + Stock3);
+                    response3 = await fetch("/callback4/getInfo?data=" + Stock3);
                     let infoJson3 = await response3.json();
                     info3(infoJson3);
                     Plotly.newPlot('chart3', chartJson3, {});
@@ -137,7 +145,7 @@
              if (response4.ok) {
                 let chartJson4 = await response4.json();
                 if (response4.ok) {
-                    response4 = await fetch("/callback3/getInfo?data=" + Stock4);
+                    response4 = await fetch("/callback4/getInfo?data=" + Stock4);
                     let infoJson4 = await response4.json();
                     info4(infoJson4);
                     Plotly.newPlot('chart4', chartJson4, {});
@@ -152,7 +160,7 @@
             if (response5.ok) {
                 let chartJson5 = await response5.json();
                 if (response5.ok) {
-                    response5 = await fetch("/callback3/getInfo?data=" + Stock5);
+                    response5 = await fetch("/callback4/getInfo?data=" + Stock5);
                     let infoJson5 = await response5.json();
                     info5(infoJson5);
                     Plotly.newPlot('chart5', chartJson5, {});
@@ -178,20 +186,20 @@
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
                 
-            let response1 = await fetch("/callback3/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
-            let response2 = await fetch("/callback3/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
-            let response3 = await fetch("/callback3/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
-            let response4 = await fetch("/callback3/getStock?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);                
-            let response5 = await fetch("/callback3/getStock?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
-            let response1_1 = await fetch("/callback3/getReturn?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);   
-            let response2_1 = await fetch("/callback3/getReturn?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
-            let response3_1 = await fetch("/callback3/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
-            let response4_1 = await fetch("/callback3/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
-            let response5_1 = await fetch("/callback3/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);                
+            let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
+            let response2 = await fetch("/callback4/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3 = await fetch("/callback4/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            let response4 = await fetch("/callback4/getStock?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);                
+            let response5 = await fetch("/callback4/getStock?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
+            let response1_1 = await fetch("/callback4/getReturn?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);   
+            let response2_1 = await fetch("/callback4/getReturn?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3_1 = await fetch("/callback4/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            let response4_1 = await fetch("/callback4/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
+            let response5_1 = await fetch("/callback4/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);                
             if (response1.ok) {
                 let chartJson1 = await response1.json();
                 if (response1.ok) {
-                    response1 = await fetch("/callback3/getInfo?data=" + Stock1);
+                    response1 = await fetch("/callback4/getInfo?data=" + Stock1);
                     let infoJson1 = await response1.json();
                     info1(infoJson1);
                     Plotly.newPlot('chart1', chartJson1, {});
@@ -204,7 +212,7 @@
             if (response2.ok) {
                 let chartJson2 = await response2.json();
                 if (response2.ok) {
-                    response2 = await fetch("/callback3/getInfo?data=" + Stock2);
+                    response2 = await fetch("/callback4/getInfo?data=" + Stock2);
                     let infoJson2 = await response2.json();
                     info2(infoJson2);
                     Plotly.newPlot('chart2', chartJson2, {});
@@ -220,11 +228,11 @@
                 if (response3.ok) {
                     if (Stock3 = "BRK.B") 
                     {
-                        response3 = await fetch("/callback3/getInfo?data=" + "BRK-B");
+                        response3 = await fetch("/callback4/getInfo?data=" + "BRK-B");
                     }
                             else
                             {
-                                                    response3 = await fetch("/callback3/getInfo?data=" + Stock3);
+                                                    response3 = await fetch("/callback4/getInfo?data=" + Stock3);
                             }
                     let infoJson3 = await response3.json();
                     info3(infoJson3);
@@ -239,7 +247,7 @@
                          if (response4.ok) {
                 let chartJson4 = await response4.json();
                 if (response4.ok) {
-                    response4 = await fetch("/callback3/getInfo?data=" + Stock4);
+                    response4 = await fetch("/callback4/getInfo?data=" + Stock4);
                     let infoJson4 = await response4.json();
                     info4(infoJson4);
                     Plotly.newPlot('chart4', chartJson4, {});
@@ -253,7 +261,7 @@
             if (response5.ok) {
                 let chartJson5 = await response5.json();
                 if (response5.ok) {
-                    response5 = await fetch("/callback3/getInfo?data=" + Stock5);
+                    response5 = await fetch("/callback4/getInfo?data=" + Stock5);
                     let infoJson5 = await response5.json();
                     info5(infoJson5);
                     Plotly.newPlot('chart5', chartJson5, {});
@@ -332,20 +340,20 @@
                 let name = document.getElementById('alert');
                 name.innerHTML = "Selected Portfolio is: " + Portfolio + "<br> with the following Stocks " + Stock1 + ", " + Stock2 + ", " + Stock3  + ", " + Stock4  + ", " + Stock5 + ". <br>Please allow for upto 60 secs for the data to load";
                 
-            let response1 = await fetch("/callback3/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
-            let response2 = await fetch("/callback3/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
-            let response3 = await fetch("/callback3/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
-            let response4 = await fetch("/callback3/getStock?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);                
-            let response5 = await fetch("/callback3/getStock?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
-            let response1_1 = await fetch("/callback3/getReturn?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);   
-            let response2_1 = await fetch("/callback3/getReturn?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
-            let response3_1 = await fetch("/callback3/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
-            let response4_1 = await fetch("/callback3/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
-            let response5_1 = await fetch("/callback3/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);                
+            let response1 = await fetch("/callback4/getStock?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);    
+            let response2 = await fetch("/callback4/getStock?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3 = await fetch("/callback4/getStock?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            let response4 = await fetch("/callback4/getStock?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);                
+            let response5 = await fetch("/callback4/getStock?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);
+            let response1_1 = await fetch("/callback4/getReturn?data=" + Stock1 + "&period=" + Period + "&interval=" + Interval);   
+            let response2_1 = await fetch("/callback4/getReturn?data=" + Stock2 + "&period=" + Period + "&interval=" + Interval);
+            let response3_1 = await fetch("/callback4/getReturn?data=" + Stock3 + "&period=" + Period + "&interval=" + Interval);
+            let response4_1 = await fetch("/callback4/getReturn?data=" + Stock4 + "&period=" + Period + "&interval=" + Interval);
+            let response5_1 = await fetch("/callback4/getReturn?data=" + Stock5 + "&period=" + Period + "&interval=" + Interval);                
             if (response1.ok) {
                 let chartJson1 = await response1.json();
                 if (response1.ok) {
-                    response1 = await fetch("/callback3/getInfo?data=" + Stock1);
+                    response1 = await fetch("/callback4/getInfo?data=" + Stock1);
                     let infoJson1 = await response1.json();
                     info1(infoJson1);
                     Plotly.newPlot('chart1', chartJson1, {});
@@ -358,7 +366,7 @@
             if (response2.ok) {
                 let chartJson2 = await response2.json();
                 if (response2.ok) {
-                    response2 = await fetch("/callback3/getInfo?data=" + Stock2);
+                    response2 = await fetch("/callback4/getInfo?data=" + Stock2);
                     let infoJson2 = await response2.json();
                     info2(infoJson2);
                     Plotly.newPlot('chart2', chartJson2, {});
@@ -372,7 +380,7 @@
             if (response3.ok) {
                 let chartJson3 = await response3.json();
                 if (response3.ok) {
-                    response3 = await fetch("/callback3/getInfo?data=" + Stock3);
+                    response3 = await fetch("/callback4/getInfo?data=" + Stock3);
                     let infoJson3 = await response3.json();
                     info3(infoJson3);
                     Plotly.newPlot('chart3', chartJson3, {});
@@ -386,7 +394,7 @@
                 if (response4.ok) {
                 let chartJson4 = await response4.json();
                 if (response4.ok) {
-                    response4 = await fetch("/callback3/getInfo?data=" + Stock4);
+                    response4 = await fetch("/callback4/getInfo?data=" + Stock4);
                     let infoJson4 = await response4.json();
                     info4(infoJson4);
                     Plotly.newPlot('chart4', chartJson4, {});
@@ -400,7 +408,7 @@
             if (response5.ok) {
                 let chartJson5 = await response5.json();
                 if (response5.ok) {
-                    response5 = await fetch("/callback3/getInfo?data=" + Stock5);
+                    response5 = await fetch("/callback4/getInfo?data=" + Stock5);
                     let infoJson5 = await response5.json();
                     info5(infoJson5);
                     Plotly.newPlot('chart5', chartJson5, {});
@@ -594,11 +602,11 @@
             let Stock = document.getElementById('stock').value;
             let Period = document.getElementById('period').value;
             let Interval = document.getElementById('interval').value;
-            let response = await fetch("/callback3/getStock?data=" + Stock + "&period=" + Period + "&interval=" + Interval);
+            let response = await fetch("/callback4/getStock?data=" + Stock + "&period=" + Period + "&interval=" + Interval);
             if (response.ok) {
                 let chartJson = await response.json();
                 if (response.ok) {
-                    response = await fetch("/callback3/getInfo?data=" + Stock);
+                    response = await fetch("/callback4/getInfo?data=" + Stock);
                     let infoJson = await response.json();
                     info(infoJson);
                     Plotly.newPlot('chart', chartJson, {});
@@ -651,8 +659,15 @@
         <div class="col-12"> <span id="alert" style="color:red"> </span> </div>
     </div>
     <div class="row">
-        <div class="row">
-            <div class="col-3"><p><b>Stock info 1</b></p>
+                    <div id="PortfolioChart1" class="chart" style="height: 300px;border: 1px solid; 
+                    box-shadow: 5px 5px 5px #888888;">
+                </div> 
+        <br>
+        <br>
+    </div>    
+    <div class="row"> <br></div>
+    <div class="row"> 
+    <div class="col"><p><b>Stock info 1</b></p>
                 <p>Symbol: <span id="symbol1">N/A</span></p>
                 <p>Day High: <span id="dayHigh1">N/A</span></p>
                 <p>Day Low: <span id="dayLow1">N/A</span></p> 
@@ -660,7 +675,43 @@
                 <p>52-Week Low: <span id="52WeekLow1">N/A</span></p> 
                 <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta1">N/A</span></p>                
             </div>
-            <div class="col-9">
+        <div class="col"><p><b>Stock info 2</b></p>
+                <p>Symbol: <span id="symbol2">N/A</span></p>
+                <p>Day High: <span id="dayHigh2">N/A</span></p>
+                <p>Day Low: <span id="dayLow2">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh2">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow2">N/A</span></p>                
+                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta2">N/A</span></p>
+            </div>
+        <div class="col"><p><b>Stock info 3</b></p>
+                <p>Symbol: <span id="symbol3">N/A</span></p>
+                <p>Day High: <span id="dayHigh3">N/A</span></p>
+                <p>Day Low: <span id="dayLow3">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh3">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow3">N/A</span></p> 
+                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta3">N/A</span></p>                
+            </div>
+        <div class="col"><p><b>Stock info 4</b></p>
+                <p>Symbol: <span id="symbol4">N/A</span></p>
+                <p>Day High: <span id="dayHigh4">N/A</span></p>
+                <p>Day Low: <span id="dayLow4">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh4">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow4">N/A</span></p> 
+                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta4">N/A</span></p>                
+            </div>
+           <div class="col"><p><b>Stock info 5</b></p>
+                <p>Symbol: <span id="symbol5">N/A</span></p>
+                <p>Day High: <span id="dayHigh5">N/A</span></p>
+                <p>Day Low: <span id="dayLow5">N/A</span></p> 
+                <p>52-Week High: <span id="52WeekHigh5">N/A</span></p>
+                <p>52-Week Low: <span id="52WeekLow5">N/A</span></p> 
+                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta5">N/A</span></p>                
+            </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            
+            <div class="col-4">
                 <h2 id="companyName1"></h2>
 
                 <div id="chart1" class="chart" style="height: 300px;border: 1px solid; 
@@ -672,17 +723,7 @@
 
                 <br>
             </div>  
-        </div>
-        <div class="row">
-            <div class="col-3"><p><b>Stock info 2</b></p>
-                <p>Symbol: <span id="symbol2">N/A</span></p>
-                <p>Day High: <span id="dayHigh2">N/A</span></p>
-                <p>Day Low: <span id="dayLow2">N/A</span></p> 
-                <p>52-Week High: <span id="52WeekHigh2">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow2">N/A</span></p>                
-                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta2">N/A</span></p>
-            </div>
-            <div class="col-9">
+            <div class="col-4">
                 <h2 id="companyName2"></h2>
 
                 <div id="chart2" class="chart" style="height: 300px;border: 1px solid; 
@@ -694,17 +735,9 @@
 
                 <br>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3"><p><b>Stock info 3</b></p>
-                <p>Symbol: <span id="symbol3">N/A</span></p>
-                <p>Day High: <span id="dayHigh3">N/A</span></p>
-                <p>Day Low: <span id="dayLow3">N/A</span></p> 
-                <p>52-Week High: <span id="52WeekHigh3">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow3">N/A</span></p> 
-                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta3">N/A</span></p>                
-            </div>
-            <div class="col-9">
+
+            
+            <div class="col-4">
                 <h2 id="companyName3"></h2>
 
                 <div id="chart3" class="chart" style="height: 300px;border: 1px solid; 
@@ -718,15 +751,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3"><p><b>Stock info 4</b></p>
-                <p>Symbol: <span id="symbol4">N/A</span></p>
-                <p>Day High: <span id="dayHigh4">N/A</span></p>
-                <p>Day Low: <span id="dayLow4">N/A</span></p> 
-                <p>52-Week High: <span id="52WeekHigh4">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow4">N/A</span></p> 
-                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta4">N/A</span></p>                
-            </div>
-            <div class="col-9">
+            
+            <div class="col-4">
                 <h2 id="companyName4"></h2>
 
                 <div id="chart4" class="chart" style="height: 300px;border: 1px solid; 
@@ -738,17 +764,8 @@
 
                 <br>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3"><p><b>Stock info 5</b></p>
-                <p>Symbol: <span id="symbol5">N/A</span></p>
-                <p>Day High: <span id="dayHigh5">N/A</span></p>
-                <p>Day Low: <span id="dayLow5">N/A</span></p> 
-                <p>52-Week High: <span id="52WeekHigh5">N/A</span></p>
-                <p>52-Week Low: <span id="52WeekLow5">N/A</span></p> 
-                <p class="hovertext" data-hover="Beta is a concept that measures the expected move in a stock relative to movements in the overall market.">Beta: <span id="beta5">N/A</span></p>                
-            </div>
-            <div class="col-9">
+         
+            <div class="col-4">
                 <h2 id="companyName5"></h2>
 
                 <div id="chart5" class="chart" style="height: 300px;border: 1px solid; 
@@ -762,7 +779,7 @@
         </div>
     </div>
     <div class="row">            
-        <div class="col-12" style="font-size:smaller;padding:10px;text-align: right;">
+        <div class="col-12" style="padding:10px;text-align: right;">
                 <i>The data is, to the best of our knowledge, correct but cannot be guarenteed to be so</i>
                 <br/>
                 <i>This site is for educational and demonstation purposes, only</i>

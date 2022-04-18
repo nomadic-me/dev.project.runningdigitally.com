@@ -89,6 +89,20 @@ def cb3(endpoint):
     else:
         return "Bad endpoint", 400
     
+@app.route('/callback4/<endpoint>')
+def cb4(endpoint):   
+    if endpoint == "getStock":
+        return alpaca_get_market_data(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
+    elif endpoint == "getInfo":
+        stock = request.args.get('data')
+        st = yf.Ticker(stock)
+        return json.dumps(st.info)
+    elif endpoint == "getReturn":
+        return mcforecast_get_data(request.args.get('data'),request.args.get('period'),request.args.get('interval'))
+    elif endpoint == "getPortfolio":
+        return mcforecast_get_portfolio(request.args.get('stock1'),request.args.get('stock2'),request.args.get('stock3'),request.args.get('stock4'),request.args.get('stock5'))
+    else:
+        return "Bad endpoint", 400
     
 # Return the JSON data for the Plotly graph
 def gm(stock,period, interval):
@@ -170,6 +184,32 @@ def mcforecast_get_data(stock,period, interval):
     
     fig_stock = px.area(MC_5years.portfolio_data, x=MC_5years.portfolio_data.index, y='daily_return', 
         range_y=(min,max), template="seaborn", title=chart_title)
+    graphJSON = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
+
+def mcforecast_get_portfolio(stock1,stock2,stock3,stock4,stock5):
+    start_date = "2019-04-10"
+    end_date = "2022-04-10"
+    # Set the tickers
+    # tickers = "AAPL"
+    tickers = [stock1,stock2,stock3,stock4,stock5]
+    timeframe = "1D"
+    api = REST(api_key1, api_secret_key1, api_version='v2')
+    df2 = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    pivottable = pd.pivot_table(df2, values='close', index=df2.index, columns=['symbol'])
+    ticker_name = [(x,'close') for x in pivottable.columns]
+    micolumns = pd.MultiIndex.from_tuples(ticker_name)
+    pivottable.columns = micolumns
+    #chart_title = "Montecarlo Simulations for " + tickers[0] + ";" + tickers[1] + ";" + tickers[2] + ";" + tickers[3] + ";" + tickers[4] + ";"
+    MC_5years = MCSimulation(portfolio_data = pivottable,
+        weights = [0.2,0.2,0.2,0.2,0.2],
+        num_simulation = 100,
+        num_trading_days = 252*5
+    )
+    MC_5years.calc_cumulative_return()    
+    plot_title = f"{MC_5years.nSim} Simulations of Cumulative Portfolio Return Trajectories Over the Next {MC_5years.nTrading} Trading Days."
+    fig_stock = px.line(MC_5years.simulated_return, template="seaborn", title=plot_title)
+    fig_stock.update_layout(showlegend=False)
     graphJSON = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
