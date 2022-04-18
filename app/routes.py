@@ -61,13 +61,14 @@ def graph1():
     # Create the Alpaca API object
     api_secret_key1=os.getenv("ALPACA_SECRET_KEY")
     
-    start_date = "2022-02-21"
-    end_date = "2022-03-21"
+    start_date = "2019-04-10"
+    end_date = "2022-04-10"
     # Set the tickers
-    tickers = ["TSLA","AAPL"]
+    tickers = "TSLA"
     timeframe = "1D"
     api = REST(api_key1, api_secret_key1, api_version='v2')
     df2 = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
+    df2.loc[:,'symbol'] = tickers
     #df2 = api.get_bars("AAPL", TimeFrame.Hour, "2021-06-08", "2021-06-08", adjustment='raw').df
     #stock_and_bond_prices = api.get_bars(tickers, TimeFrame.Day, start_date, end_date, adjustment='raw').df
     #stock_and_bond_prices.index = stock_and_bond_prices.index.date
@@ -79,9 +80,18 @@ def graph1():
     })
     fig1 = px.bar(df1, x='Fruit', y='Amount', color='City', barmode='group')
     fig2 = px.bar(df2, x='symbol', y='close', color='symbol')
+    max = (df2['close'].max())
+    min = (df2['close'].min())
+    range = max - min
+    margin = range * 0.05
+    max = max + margin
+    min = min - margin
+    fig_stock = px.area(df2, x=df2.index, y="open", hover_data=("symbol","open","close","volume"), 
+        range_y=(min,max), template="seaborn" )
     graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
     graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('graph1.html', graphJSON=graphJSON2, title="Graph1")
+    graphJSON3 = json.dumps(fig_stock, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template('graph1.html', graphJSON=graphJSON3, title="Graph1")
 
 @app.route('/new')
 def new():
