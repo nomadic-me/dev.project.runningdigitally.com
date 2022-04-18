@@ -58,24 +58,10 @@ def cb():
 def index():
     return render_template('index.html', title='Home')
 
-
 @app.route('/new')
 def new():
     return render_template('new.html', title='New')
     
-    
-#This is a Hello World Graph
-#Adding Plotly Graph with Callback
-@app.route('/Graph2')
-def graph2():
-    return render_template('graph2.html')#,  graphJSON=gm())
-
-
-def gm_gdp(country='United Kingdom'):
-    df = pd.DataFrame(px.data.gapminder())
-    fig = px.line(df[df['country']==country], x="year", y="gdpPercap", title=country)
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON
     
 
     
