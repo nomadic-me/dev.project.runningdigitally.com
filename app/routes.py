@@ -241,8 +241,12 @@ def mcforecast_get_portfolio_cumulative_return(stock1,stock2,stock3,stock4,stock
     ci_upper = round(MC_5years.confidence_interval.iloc[1] * initial_investment, 2)
     # Print results
     data = {}
-    cumulative_return = (f"Based on Monte-Carlo Simulation, There is a 95% chance that an initial investment of ${initial_investment} in the portfolio"
-      f" over the next 5 years will end within in the range of"
+    cumulative_return = (f"Using <span class='maindiv'>"
+                f"<span style='text-decoration: underline;background:#d4dbef;' data-hover=''> Monte-Carlo Simulation, </span> <span class='test'>Monte Carlo simulation (also known as the Monte Carlo Method) lets you see all the possible outcomes of your decisions and assess the impact of risk.<a href='/Educate-Yourself#Monte-Carlo' target='_blank'>Read More</a></span></span>" 
+        f" with 95%  <span class='maindiv'>"
+                f"<span style='text-decoration: underline;background:#d4dbef;' data-hover=''> confidence, </span> <span class='test'>Learn about the value at risk, how confidence intervals and confidence levels are used to interpret the value at risk and the difference between the two.<a href='/Educate-Yourself#Confidence' target='_blank'>Read More</a></span></span>  "
+        f" the projected <span class='maindiv'><span style='text-decoration: underline;background:#d4dbef;' data-hover=''> return, </span> <span class='test'>Return is the financial gain or loss on an investment. Yield measures the income, such as interest and dividends, from an investment and is expressed as a percentage.<a href='/Educate-Yourself#Return' target='_blank'>Read More</a></span></span>  on an initial investment of ${initial_investment} in the portfolio"
+      f" over the next 5 years will fall within in the range of"
       f" ${ci_lower:,} and ${ci_upper:,}"
       f"<br><br> This site is for educational and demonstation purposes, only and should not be relied upon as Finanacial Advice")    
     data['key'] = cumulative_return
