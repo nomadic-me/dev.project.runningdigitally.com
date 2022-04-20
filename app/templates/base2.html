@@ -19,6 +19,22 @@
 
 <style>
 
+.test {
+    
+    display:none;
+     top: 30px; 
+     left: 10px;
+    background: orange;
+    padding: 5px;
+    border: 1px solid black;
+}
+.maindiv {
+  display:inline-block;
+}
+.maindiv:hover .test {
+  display:block;
+  background-color:#d4dbef;  
+}
     
     img {
   display: block;
@@ -85,7 +101,7 @@ body {
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('return_portfolio') }}">Returns: Individual Stock</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('portfolio') }}">Portfolio: Individual Stock</a></li> 
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('stock') }}">Individual Stock</a></li>
-       
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('education') }}">Education: Learn More About Investing</a></li>       
         
 
     </ul>

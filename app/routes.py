@@ -267,3 +267,7 @@ def return_portfolio():
 @app.route('/Return-Portfolio')
 def return_portfolio_all():
     return render_template('return_all.html')#,  graphJSON=gm())
+
+@app.route('/Educate-Yourself')
+def education():
+    return render_template('education.html')#,  graphJSON=gm())
