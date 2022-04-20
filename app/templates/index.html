@@ -5,18 +5,42 @@
 <div class="container">
     <div class="row">
         <br><br>        <br><br>
-<h1 style="text-align: center;">Hi, Welcome to "A Look On Millennial Investing"</ h1>
+<h1 style="text-align: center;">A Look On Millennial Investing</ h1>
 
-<h2> Awesome things are brewing behind the scenes </ h2>
+<h2> Welcome, Awesome things are brewing behind the scenes </ h2>
 <h3> 
     We have used recommendations from industry experts to curate 3 Portfolios to match our Millennial Investors<br> 
-    Find one that best resonates with you.
-    <ul>
-                    <li>Portfolio 1: Low Volatility (Beta < 1): BRK.B, T, VYM, PG and VNQ</li>
-                    <li>Portfolio 2: Balanced Volatility:  (Beta ≈ 1): VOO, MSFT, BRK.B, VYM and U</li>
-                    <li>Portfolio 3: High Volatility: (Beta > 1): STNE, U, SPOT, BROS and BARK</li>
-    </ul>
-<br>
+    Find one that best resonates with you.<br><br><br>
+    </div>
+                 <div class="row" style="text-align: center;">
+ <div class="col-4"><h3> 
+                           Low Risk 
+     <img src="{{ url_for('static', filename='LowRisk.png') }}">
+            </h3> </div>                                                                   
+ <div class="col-4"> <h3>                                                           
+                    Balanced
+     <img src="{{ url_for('static', filename='BalancedRisk.png') }}">
+   </h3>  </div>
+ <div class="col-4"> <h3>                                                           
+     High Risk
+     <img src="{{ url_for('static', filename='HighRisk.png') }}">
+            </h3></div>
+            </div>   
+        
+        <div class="row" >
+ <div class="col-4"><h3 style="text-align: center;"> 
+                            Portfolio 1:</h3><br> <h3>Low Volatility (Beta < 1): BRK.B, T, VYM, PG and VNQ
+        </h3>  </div>                                                                   
+ <div class="col-4"> <h3 style="text-align: center;">                                                           
+                    Portfolio 2:</h3><br> <h3>Balanced Volatility:  (Beta ≈ 1): VOO, MSFT, BRK.B, VYM and U
+    </h3> </div>
+ <div class="col-4">    <h3 style="text-align: center;">                                                        
+                    Portfolio 3:</h3><br> <h3>High Volatility: (Beta > 1): STNE, U, SPOT, BROS and BARK
+            </h3></div>
+            </div>
+            
+
+<br><h3>
 You can check out the Visualization, Portfolio Details and Monte-Carlo Simulations Based Portfolio Prediciton in the pages below:<br>  
     <ul>
                     <li><a href="{{ url_for('return_portfolio_all') }}">Returns: Overall Portfolio</a></li>
