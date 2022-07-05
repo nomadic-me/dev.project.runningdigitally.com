@@ -1,9 +1,9 @@
 import sys, os
 
-INTERP = os.path.join(os.environ['HOME'], 'dev.project.runningdigitally.com', 'venv2', 'bin', 'python3')
+INTERP = os.path.join(os.environ['HOME'], 'millennialinvesting.runningdigitally.com', 'venv', 'bin', 'python3')
 
 
-if os.environ['HOME'] != '/home/dh_5ejt8t':
+if os.environ['HOME'] != '/home/dh_hkej5d':
     from dotenv import load_dotenv 
     load_dotenv()
     if (os.environ.get('INTERP')):
